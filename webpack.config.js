@@ -34,7 +34,7 @@ module.exports = (env, options) => {
       ]
     },
     resolve: {
-      extensions: ["*", ".js", ".jsx"]
+      extensions: ["*", ".js", ".jsx", ".json"]
     },
     output: {
       path: __dirname + "/dist",
