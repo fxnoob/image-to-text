@@ -9,20 +9,29 @@ const queryString = require("query-string");
 function App() {
   const [ocr, setOcr] = useState("Recognizing...");
   const [err, setError] = useState("");
+  const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const doOCR = async () => {
     const parsed = queryString.parse(location.search);
-    const url = parsed.url
-      ? parsed.url
-      : "https://images.unsplash.com/photo-1569229569803-69384f5efa83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80";
+    const urlString = parsed.url ? parsed.url : "";
+    setUrl(urlString);
     chrome.runtime.sendMessage({ path: "/recognize", url: url }, response => {
+      console.log({ response });
       const { status, error, data } = response;
-      if (status == "SUCCESS") {
-        setOcr(data);
-      } else {
-        setOcr("Error Occurred!");
+      console.log({ url, respUrl: response.url });
+      if (url == "") {
+        return;
       }
-      setLoading(false);
+      if (url == response.url) {
+        console.log("if");
+        if (status == "SUCCESS") {
+          setOcr(data);
+        } else {
+          console.log("else");
+          setOcr("Error Occurred!");
+        }
+        setLoading(false);
+      }
     });
   };
   useEffect(() => {
@@ -37,7 +46,7 @@ function App() {
         ) : err != "" ? (
           <div />
         ) : (
-          <Home ocrText={ocr} />
+          <Home ocrText={ocr} url={url} />
         )}
       </Container>
     </React.Fragment>

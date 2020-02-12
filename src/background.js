@@ -1,8 +1,7 @@
 import "@babel/polyfill";
-import "./tesseract.min";
 import chromeService from "./services/chromeService";
 import ROUTES from "./routes";
-
+import "./tesseract.min";
 /**
  * Main extension functionality
  *
@@ -10,6 +9,7 @@ import ROUTES from "./routes";
  */
 class Main {
   constructor() {
+    this.ctxMenuId = null;
     this.init().catch(e => {
       console.log("Error loading extension", { e });
     });
@@ -17,6 +17,7 @@ class Main {
   init = async () => {
     chromeService.setBadgeOnActionIcon("Loading...");
     await this.initRoutes();
+    this.initContextMenu();
     this.popUpClickSetup();
     chromeService.setBadgeOnActionIcon("");
   };
@@ -25,6 +26,25 @@ class Main {
       console.log({ tab });
       chromeService.openHelpPage();
     });
+  };
+  /**
+   * Context menu option initialization
+   *
+   * @method
+   * @memberof Main
+   */
+  initContextMenu = () => {
+    console.log({ ctx: chrome.contextMenus });
+    if (this.ctxMenuId) return;
+    this.ctxMenuId = chromeService.createContextMenu({
+      title: "Extract Text from this image",
+      contexts: ["image"],
+      onclick: this.onContextMenuClick
+    });
+  };
+  onContextMenuClick = (info, tab) => {
+    const { srcUrl } = info;
+    chromeService.openHelpPage(srcUrl);
   };
   initTesser = async () => {
     const { createWorker } = Tesseract;
@@ -48,6 +68,7 @@ class Main {
     const worker = await this.initTesser();
     const routes = async (request, sender, sendResponse) => {
       const response = {
+        url: "",
         status: "SUCCESS",
         error: "",
         data: ""
@@ -60,6 +81,7 @@ class Main {
         response.status = "ERROR";
         response.error = e;
       }
+      response.url = request.url;
       sendResponse(response);
     };
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

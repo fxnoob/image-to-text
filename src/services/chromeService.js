@@ -200,9 +200,13 @@ class ChromeApi {
    * @method
    * @memberof ChromeApi
    */
-  openHelpPage = () => {
-    const helpUrl = chrome.runtime.getURL("option.html") + "?page=help";
+  openHelpPage = (url = "") => {
+    const helpUrl = chrome.runtime.getURL("option.html") + `?url=${url}`;
     chrome.tabs.create({ url: helpUrl }, () => {});
+  };
+
+  createContextMenu = opts => {
+    return chrome.contextMenus.create(opts);
   };
 }
 const chromeService = new ChromeApi();
