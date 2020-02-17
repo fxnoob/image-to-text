@@ -10,14 +10,23 @@
   "background": {
     "scripts": ["background.bundle.js"]
   },
-  "permissions": ["storage", "webNavigation", "*://*/*"],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "webNavigation"
+  ],
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
-    },
-    "default_title": "default title",
-    "default_popup": "popup.html"
+    }
   },
+  "web_accessible_resources": [
+    "js/worker.min.js",
+    "js/tessearct-core.wasm.js",
+    "traineddata/*.traineddata.gz"
+  ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
