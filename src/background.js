@@ -44,7 +44,7 @@ class Main {
   };
   onContextMenuClick = (info, tab) => {
     const { srcUrl } = info;
-    chromeService.openHelpPage(srcUrl);
+    chromeService.openHelpPage(encodeURIComponent(srcUrl));
   };
   initTesser = async () => {
     const { createWorker } = Tesseract;
