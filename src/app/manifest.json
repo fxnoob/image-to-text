@@ -1,11 +1,12 @@
 {
-  "name": "chrome-extension-boilerplate",
+  "name": "Image to Text",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "description",
+  "description": "Image to Text (OCR)",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/16x16.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
   },
   "background": {
     "scripts": ["background.bundle.js"]
@@ -19,8 +20,9 @@
   ],
   "browser_action": {
     "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
+      "16": "images/16x16.png",
+      "48": "images/48x48.png",
+      "128": "images/128x128.png"
     }
   },
   "web_accessible_resources": [

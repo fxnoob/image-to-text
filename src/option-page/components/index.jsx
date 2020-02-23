@@ -4,6 +4,8 @@ import Container from "@material-ui/core/Container";
 import Home from "./Home";
 import WindTurbineAnimation from "../../assets/WindTurbine";
 import Loader from "./Loader";
+import ErrorComponent from "./Error";
+
 const queryString = require("query-string");
 
 function App() {
@@ -13,12 +15,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const doOCR = async () => {
     const parsed = queryString.parse(location.search);
-    const urlString = parsed.url ? parsed.url : "";
+    const urlString = decodeURIComponent(parsed.url ? parsed.url : "");
     setUrl(urlString);
+    console.log({ urlString });
     chrome.runtime.sendMessage({ path: "/recognize", url: url }, response => {
       console.log({ response });
       const { status, error, data } = response;
-      console.log({ url, respUrl: response.url });
+      console.log({ url, respUrl: response.url, error });
       if (url == "") {
         return;
       }
@@ -28,6 +31,7 @@ function App() {
           setOcr(data);
         } else {
           console.log("else");
+          setError("Error!");
           setOcr("Error Occurred!");
         }
         setLoading(false);
@@ -44,7 +48,7 @@ function App() {
         {loading ? (
           <Loader json={WindTurbineAnimation} text="loading..." />
         ) : err != "" ? (
-          <div />
+          <ErrorComponent text="" />
         ) : (
           <Home ocrText={ocr} url={url} />
         )}
