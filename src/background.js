@@ -76,7 +76,6 @@ class Main {
       try {
         const options = { worker };
         response.data = await ROUTES[request.path](request, options);
-        console.log({ response });
       } catch (e) {
         response.status = "ERROR";
         response.error = e;
