@@ -23,8 +23,12 @@ class Main {
   };
   popUpClickSetup = () => {
     chrome.browserAction.onClicked.addListener(tab => {
-      console.log({ tab });
-      chromeService.openHelpPage();
+      chrome.tabs.captureVisibleTab(screenshotUrl => {
+        chromeService.sendMessageToActiveTab({
+          action: "show_popup",
+          data: { screenshotUrl }
+        });
+      });
     });
   };
   /**

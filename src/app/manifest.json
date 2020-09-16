@@ -11,7 +11,7 @@
   "background": {
     "scripts": ["background.bundle.js"]
   },
-  "permissions": ["<all_urls>", "contextMenus"],
+  "permissions": ["<all_urls>", "contextMenus", "tabs"],
   "browser_action": {
     "default_icon": {
       "16": "images/16x16.png",
@@ -19,6 +19,13 @@
       "128": "images/128x128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.bundle.js"],
+      "run_at": "document_end"
+    }
+  ],
   "web_accessible_resources": [
     "js/worker.min.js",
     "js/tessearct-core.wasm.js",

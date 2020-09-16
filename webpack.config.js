@@ -19,6 +19,10 @@ module.exports = (env, options) => {
           use: ["babel-loader"]
         },
         {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"]
+        },
+        {
           test: /\.(gif|png|jpe?g|svg)$/i,
           use: [
             "file-loader",
@@ -41,6 +45,7 @@ module.exports = (env, options) => {
       publicPath: "/",
       filename: "[name].bundle.js"
     },
+    devtool: "inline-sourcemap",
     plugins: [
       new CopyWebpackPlugin(
         [
