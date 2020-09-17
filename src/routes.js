@@ -1,3 +1,5 @@
+import chromeService from "./services/chromeService";
+
 const ROUTES = {};
 
 ROUTES["/recognize"] = async (request, { worker }) => {
@@ -14,6 +16,11 @@ ROUTES["/recognize"] = async (request, { worker }) => {
     data: { text }
   } = await worker.recognize(image);
   return text;
+};
+
+ROUTES["/open_tab"] = async (request, { worker }) => {
+  chromeService.openHelpPage(encodeURIComponent(request.data.imgSrc));
+  return true;
 };
 
 export default ROUTES;
