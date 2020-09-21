@@ -2,7 +2,7 @@
 
 ### Extract Text from an Image on any webpage.
 
-<a href="https://www.youtube.com/watch?v=27vNfF-K52c" target="_blank"><img src="https://img.youtube.com/vi/27vNfF-K52c/hqdefault.jpg" height="360"></a>
+<a href="https://www.youtube.com/watch?v=0BnUis2H_Kc" target="_blank"><img src="https://img.youtube.com/vi/0BnUis2H_Kc/hqdefault.jpg" height="360"></a>
 
 ## Basic Usage
 

@@ -9,7 +9,8 @@ import "./tesseract.min";
  */
 class Main {
   constructor() {
-    this.ctxMenuId = null;
+    this.ctxMenuId1 = null;
+    this.ctxMenuId2 = null;
     this.init().catch(e => {
       console.log("Error loading extension", { e });
     });
@@ -22,12 +23,11 @@ class Main {
     chromeService.setBadgeOnActionIcon("");
   };
   popUpClickSetup = () => {
-    chrome.browserAction.onClicked.addListener(tab => {
-      chrome.tabs.captureVisibleTab(screenshotUrl => {
-        chromeService.sendMessageToActiveTab({
-          action: "show_popup",
-          data: { screenshotUrl }
-        });
+    chrome.browserAction.onClicked.addListener(async () => {
+      const screenshotUrl = await chromeService.takeScreenShot();
+      chromeService.sendMessageToActiveTab({
+        action: "show_popup",
+        data: { screenshotUrl }
       });
     });
   };
@@ -38,15 +38,27 @@ class Main {
    * @memberof Main
    */
   initContextMenu = () => {
-    console.log({ ctx: chrome.contextMenus });
-    if (this.ctxMenuId) return;
-    this.ctxMenuId = chromeService.createContextMenu({
+    if (this.ctxMenuId1) return;
+    this.ctxMenuId1 = chromeService.createContextMenu({
+      title: "Extract Text from this screen",
+      contexts: ["all"],
+      onclick: this.onContextMenu1Click
+    });
+    if (this.ctxMenuId2) return;
+    this.ctxMenuId2 = chromeService.createContextMenu({
       title: "Extract Text from this image",
       contexts: ["image"],
-      onclick: this.onContextMenuClick
+      onclick: this.onContextMenu2Click
     });
   };
-  onContextMenuClick = (info, tab) => {
+  onContextMenu1Click = async (info, tab) => {
+    const screenshotUrl = await chromeService.takeScreenShot();
+    chromeService.sendMessageToActiveTab({
+      action: "show_popup",
+      data: { screenshotUrl }
+    });
+  };
+  onContextMenu2Click = (info, tab) => {
     const { srcUrl } = info;
     chromeService.openHelpPage(encodeURIComponent(srcUrl));
   };

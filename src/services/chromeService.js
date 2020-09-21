@@ -159,6 +159,18 @@ class ChromeApi {
     });
   };
 
+  takeScreenShot = () => {
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.tabs.captureVisibleTab(screenshotUrl => {
+          resolve(screenshotUrl);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
   shiftToRightTab = () => {
     this.traverseTabs(tabs => {
       let activeTabIndex = -1;
