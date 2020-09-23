@@ -126,11 +126,10 @@ class ChromeApi {
     });
   };
 
-  sendMessageToActiveTab = async payload => {
+  sendMessageToActiveTab = async (payload, callback) => {
     console.log("sendMessageToActiveTab called", payload);
     const tab = await this.getActiveTab();
-    console.log({ tab });
-    chrome.tabs.sendMessage(tab.id, payload);
+    chrome.tabs.sendMessage(tab.id, payload, callback);
     return true;
   };
 

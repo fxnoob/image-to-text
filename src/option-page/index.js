@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Index from "./components";
+import App from "./components/App";
 
 const Element = document.createElement("div");
 Element.setAttribute("id", "dfghbnjmERHJKFGHNMVBNMFBNMbmvvxnbdgf");
 document.body.appendChild(Element);
 ReactDOM.render(
-  <Index />,
+  <App />,
   document.getElementById("dfghbnjmERHJKFGHNMVBNMFBNMbmvvxnbdgf")
 );

@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 import chromeService from "./services/chromeService";
-import ROUTES from "./routes";
-import "./tesseract.min";
+import Routes from "./routes";
+import messagePassing from "./services/messagePassing";
 /**
  * Main extension functionality
  *
@@ -17,7 +17,7 @@ class Main {
   }
   init = async () => {
     chromeService.setBadgeOnActionIcon("Loading...");
-    await this.initRoutes();
+    await Routes();
     this.initContextMenu();
     this.popUpClickSetup();
     chromeService.setBadgeOnActionIcon("");
@@ -25,10 +25,11 @@ class Main {
   popUpClickSetup = () => {
     chrome.browserAction.onClicked.addListener(async () => {
       const screenshotUrl = await chromeService.takeScreenShot();
-      chromeService.sendMessageToActiveTab({
-        action: "show_popup",
-        data: { screenshotUrl }
-      });
+      await messagePassing.sendMessageToActiveTab(
+        "/show_popup",
+        { screenshotUrl },
+        () => {}
+      );
     });
   };
   /**
@@ -53,59 +54,17 @@ class Main {
   };
   onContextMenu1Click = async (info, tab) => {
     const screenshotUrl = await chromeService.takeScreenShot();
-    chromeService.sendMessageToActiveTab({
-      action: "show_popup",
-      data: { screenshotUrl }
-    });
+    await messagePassing.sendMessageToActiveTab(
+      "/show_popup",
+      { screenshotUrl },
+      () => {}
+    );
   };
   onContextMenu2Click = (info, tab) => {
     const { srcUrl } = info;
     chromeService.openHelpPage(encodeURIComponent(srcUrl));
   };
-  initTesser = async () => {
-    const { createWorker } = Tesseract;
-    const worker = createWorker({
-      workerPath: chrome.runtime.getURL("js/worker.min.js"),
-      langPath: chrome.runtime.getURL("traineddata"),
-      corePath: chrome.runtime.getURL("js/tesseract-core.wasm.js")
-    });
-    await worker.load();
-    await worker.loadLanguage("eng");
-    await worker.initialize("eng");
-    return worker;
-  };
-  /**
-   * set message passing routes. get messages from content scripts
-   *
-   * @method
-   * @memberof Main
-   */
-  initRoutes = async () => {
-    const worker = await this.initTesser();
-    const routes = async (request, sender, sendResponse) => {
-      const response = {
-        url: "",
-        status: "SUCCESS",
-        error: "",
-        data: ""
-      };
-      try {
-        const options = { worker };
-        response.data = await ROUTES[request.path](request, options);
-      } catch (e) {
-        response.status = "ERROR";
-        response.error = e;
-      }
-      response.url = request.url;
-      sendResponse(response);
-    };
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      routes(request, sender, sendResponse).catch(e => {
-        console.log(e);
-      });
-      return true;
-    });
-  };
 }
 
-const main = new Main();
+// init main
+new Main();
