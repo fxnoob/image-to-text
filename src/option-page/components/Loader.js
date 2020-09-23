@@ -9,7 +9,7 @@ export default props => {
           animationData: props.json
         }}
       />
-      <h2>{props.text}</h2>
+      <h2 style={{ textAlign: "center" }}>{props.text}</h2>
     </React.Fragment>
   );
 };

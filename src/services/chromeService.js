@@ -221,6 +221,16 @@ class ChromeApi {
   createContextMenu = opts => {
     return chrome.contextMenus.create(opts);
   };
+
+  /**
+   * tts speak
+   *
+   * @method
+   * @memberof ChromeApi
+   */
+  speak(text) {
+    chrome.tts.speak(text);
+  }
 }
 const chromeService = new ChromeApi();
 export default chromeService;

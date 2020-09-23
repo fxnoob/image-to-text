@@ -7,11 +7,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import chromeService from "../../services/chromeService";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 800
+    maxWidth: 900
   },
   media: {
     height: "100%",
@@ -34,14 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ContentCopyIcon(props) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-    </SvgIcon>
-  );
-}
-export default function RecipeReviewCard(props) {
+export default function OCRCard(props) {
   const classes = useStyles();
   const [copied, setCopied] = React.useState(false);
   const copyText = text => {
@@ -75,14 +70,29 @@ export default function RecipeReviewCard(props) {
               {props.ocrText}
             </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <ContentCopyIcon
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                copyText(props.ocrText);
-              }}
-            />
-            {copied && <div>Copied!</div>}
+          <Grid item xs={2} style={{ padding: "0", paddingTop: "1rem" }}>
+            <ButtonGroup
+              orientation="vertical"
+              color="primary"
+              variant="contained"
+              aria-label="Actions "
+            >
+              <Button
+                onClick={() => {
+                  copyText(props.ocrText);
+                }}
+              >
+                Copy
+              </Button>
+              <Button
+                onClick={() => {
+                  chromeService.speak(props.ocrText);
+                }}
+              >
+                Speak
+              </Button>
+              {copied && <div>Copied!</div>}
+            </ButtonGroup>
           </Grid>
         </Grid>
       </CardContent>

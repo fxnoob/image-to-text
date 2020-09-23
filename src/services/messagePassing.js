@@ -16,10 +16,7 @@ class MessagePassing {
     chrome.runtime.onMessage.addListener((req, sender, res) => {
       try {
         this.routes[req.path](req, res, this.options);
-      } catch (e) {
-        result.status = "ERROR";
-        result.error = e;
-      }
+      } catch (e) {}
       return true;
     });
   }

@@ -38,15 +38,19 @@ function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm">
-        {loading ? (
+      {loading ? (
+        <Container maxWidth="sm">
           <Loader json={WindTurbineAnimation} text="loading..." />
-        ) : err != "" ? (
+        </Container>
+      ) : err != "" ? (
+        <Container maxWidth="sm">
           <ErrorComponent text="" />
-        ) : (
+        </Container>
+      ) : (
+        <Container maxWidth="md">
           <Home ocrText={ocr} url={url} />
-        )}
-      </Container>
+        </Container>
+      )}
     </React.Fragment>
   );
 }
