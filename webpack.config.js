@@ -6,10 +6,10 @@ const { manifestTransform } = require("./scripts/transform");
 module.exports = (env, options) => {
   return {
     entry: {
-      content_script: "./src/content-scripts/App.jsx",
+      content_script: "./src/content-scripts/index.js",
       background: "./src/background.js",
-      popup: "./src/popup-page/App.jsx",
-      option: "./src/option-page/App.jsx"
+      popup: "./src/popup-page/index.js",
+      option: "./src/option-page/index.js"
     },
     module: {
       rules: [

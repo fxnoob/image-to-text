@@ -1,6 +1,6 @@
 {
   "name": "Image to Text",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "manifest_version": 2,
   "description": "Image to Text (OCR)",
   "icons": {
@@ -11,7 +11,7 @@
   "background": {
     "scripts": ["background.bundle.js"]
   },
-  "permissions": ["<all_urls>", "contextMenus", "activeTab"],
+  "permissions": ["<all_urls>", "contextMenus", "activeTab", "tts"],
   "browser_action": {
     "default_icon": {
       "16": "images/16x16.png",

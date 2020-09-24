@@ -126,11 +126,10 @@ class ChromeApi {
     });
   };
 
-  sendMessageToActiveTab = async payload => {
+  sendMessageToActiveTab = async (payload, callback) => {
     console.log("sendMessageToActiveTab called", payload);
     const tab = await this.getActiveTab();
-    console.log({ tab });
-    chrome.tabs.sendMessage(tab.id, payload);
+    chrome.tabs.sendMessage(tab.id, payload, callback);
     return true;
   };
 
@@ -222,6 +221,27 @@ class ChromeApi {
   createContextMenu = opts => {
     return chrome.contextMenus.create(opts);
   };
+
+  /**
+   * tts speak
+   *
+   * @method
+   * @memberof ChromeApi
+   */
+  speak(text, callback) {
+    chrome.tts.speak(text, {
+      requiredEventTypes: ["end"],
+      onEvent: function(event) {
+        if (event.type === "end") {
+          callback();
+        }
+      }
+    });
+  }
+
+  stop() {
+    chrome.tts.stop();
+  }
 }
 const chromeService = new ChromeApi();
 export default chromeService;

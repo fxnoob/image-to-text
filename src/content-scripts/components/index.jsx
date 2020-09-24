@@ -2,6 +2,7 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import FrameCropper from "./FrameCropper";
 import initialContent from "./initialIframeContent";
+import messagePassing from "../../services/messagePassing";
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -12,26 +13,21 @@ export default class Index extends React.Component {
     };
   }
   componentDidMount() {
-    chrome.runtime.onMessage.addListener(
-      async (request, sender, sendResponse) => {
-        const { action, data } = request;
-        if (action == "show_popup") {
-          if (!this.state.isModalOpen) {
-            this.setState({ imgSrc: data.screenshotUrl });
-          }
-          this.setState({ isModalOpen: !this.state.isModalOpen });
+    messagePassing.on("/show_popup", (req, res, options) => {
+      const { path, screenshotUrl } = req;
+      if (path == "/show_popup") {
+        if (!this.state.isModalOpen) {
+          this.setState({ imgSrc: screenshotUrl });
         }
+        this.setState({ isModalOpen: !this.state.isModalOpen });
       }
-    );
+    });
   }
   handleClose = () => {
     this.setState({ isModalOpen: false });
   };
   onCropEnd = imgSrc => {
-    chrome.runtime.sendMessage(
-      { path: "/open_tab", data: { imgSrc: imgSrc } },
-      response => {}
-    );
+    messagePassing.sendMessage("/open_tab", { imgSrc });
     this.handleClose();
   };
   render() {
