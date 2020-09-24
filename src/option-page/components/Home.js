@@ -36,8 +36,8 @@ export default function OCRCard(props) {
           <div class="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen"></div>
           <div class="mx-auto text-base max-w-prose lg:max-w-none">
             <p
-              class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase"
-              style={{ color: "var(--main-color) !important" }}
+              class="text-base leading-6 font-semibold tracking-wide uppercase"
+              style={{ color: "var(--main-color)" }}
             >
               Image to Text
             </p>
