@@ -228,8 +228,19 @@ class ChromeApi {
    * @method
    * @memberof ChromeApi
    */
-  speak(text) {
-    chrome.tts.speak(text);
+  speak(text, callback) {
+    chrome.tts.speak(text, {
+      requiredEventTypes: ["end"],
+      onEvent: function(event) {
+        if (event.type === "end") {
+          callback();
+        }
+      }
+    });
+  }
+
+  stop() {
+    chrome.tts.stop();
   }
 }
 const chromeService = new ChromeApi();

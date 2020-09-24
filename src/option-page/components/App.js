@@ -40,16 +40,17 @@ function App() {
       <CssBaseline />
       {loading ? (
         <Container maxWidth="sm">
-          <Loader json={WindTurbineAnimation} text="loading..." />
+          <Loader
+            json={WindTurbineAnimation}
+            text="Doing OCR stuff for You...."
+          />
         </Container>
       ) : err != "" ? (
         <Container maxWidth="sm">
           <ErrorComponent text="" />
         </Container>
       ) : (
-        <Container maxWidth="md">
-          <Home ocrText={ocr} url={url} />
-        </Container>
+        <Home ocrText={ocr} url={url} />
       )}
     </React.Fragment>
   );

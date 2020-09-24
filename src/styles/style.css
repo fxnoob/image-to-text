@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dark-bg: #223344;
+  --bg-light: #33347700;
+  --main-color: rgba(0, 167, 116, 1);
+  --main-lighter-color: rgba(0, 167, 116, 0.2);
+  --main-lightest-color: rgba(0, 167, 116, 0.1);
+}
+
+.btn {
+  @apply rounded-full;
+  background: var(--main-color);
+  color: white;
+}
+.btn:hover {
+  background-color: var(--main-lightest-color);
+  color: var(--main-color);
+}
+.btn:focus,
+.btn:active {
+  background-color: var(--main-lighter-color);
+  color: var(--main-color);
+}
+
+.btn-lite {
+  @apply rounded-full;
+  color: var(--main-color);
+  background: white;
+  border: 1px solid;
+}
+
+.btn-lite:hover {
+  background-color: var(--main-lightest-color);
+}
+
+body {
+  background: var(--bg-light);
+}
+
+button[disabled] {
+  background: var(--main-lighter-color);
+  color: var(--main-color);
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  margin: 0;
+  flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.12);
+}
