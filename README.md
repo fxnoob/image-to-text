@@ -4,37 +4,12 @@
 
 <a href="https://www.youtube.com/watch?v=0BnUis2H_Kc" target="_blank"><img src="https://img.youtube.com/vi/0BnUis2H_Kc/hqdefault.jpg" height="360"></a>
 
-## Basic Usage
-
-```
-    yarn
-    yarn dev // create development build
-    yarn build // create production build
-```
-
 ## features:
 
-> 1. Support for ES7 ( with Babel and polyfill)
-> 2. popup page with reactjs and material ui framework
-> 3. Content script with reactjs and material ui framework
-> 4. Bundling (webpack)
+> - Right click on any image and click on 'extract text' from context menu to extract the text from an Image.
+> - Click on extension icon to select a part of current tab and extract text from it.
+> - Play extracted text as an Audio(tts)
 
-## directory structure
+#### WebStore
 
-> - `src/` is root directory for a chrome extension. it includes `manifest.json` file and other static stuff.
-
-> - `src/background.js` is main background js file for the chrome extension.
-
-> - `src/popup-page` is the directory which includes react js setup for popup page.
-
-> - `src/content-scripts` is the directory directory which includes react js setup for content script.
-
-> - `src/services` is the directory for services that can be written in es6,es7 or es8...
-
-## How to extend ?
-
-> - Write chrome extension's background scripts code in `src/background.js`
-
-> - Write chrome extension's popup page codes in `src/popup-page` Reactjs directory system.
-
-> - Write chrome extension's content scripts codes in `src/content-scripts` Reactjs directory system.
+[https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo](https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo)
