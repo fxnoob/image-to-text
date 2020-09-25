@@ -9,6 +9,7 @@
 > - Right click on any image and click on 'extract text' from context menu to extract the text from an Image.
 > - Click on extension icon to select a part of current tab and extract text from it.
 > - Play extracted text as an Audio(tts)
+> - PDF text extraction
 
 #### WebStore
 

@@ -35,12 +35,14 @@ export default function OCRCard(props) {
         <div class="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
           <div class="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen"></div>
           <div class="mx-auto text-base max-w-prose lg:max-w-none">
-            <p
+            <a
               class="text-base leading-6 font-semibold tracking-wide uppercase"
               style={{ color: "var(--main-color)" }}
+              href="https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo"
+              target="_blank"
             >
               Image to Text
-            </p>
+            </a>
             <h1 class="mt-2 mb-8 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
               OCR Results
             </h1>
@@ -115,6 +117,16 @@ export default function OCRCard(props) {
                 >
                   {playing ? "Speaking" : "Speak"}
                 </button>
+                <a
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition duration-150 ease-in-out btn"
+                  href={`https://translate.google.com/#auto/en/${encodeURIComponent(
+                    ocrText
+                  )}`}
+                  target="_blank"
+                  style={{ marginLeft: "1rem" }}
+                >
+                  Translate
+                </a>
                 <button
                   onClick={() => {
                     copyText(ocrText);
@@ -135,7 +147,11 @@ export default function OCRCard(props) {
                 {copied && <span style={{ marginLeft: "1rem" }}>Copied!</span>}
               </div>
               <div
-                style={{ marginTop: "1rem" }}
+                style={{
+                  marginTop: "2rem",
+                  border: "1px solid",
+                  padding: "1rem"
+                }}
                 class="prose text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1"
               >
                 {ocrText}

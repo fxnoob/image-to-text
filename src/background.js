@@ -11,6 +11,7 @@ class Main {
   constructor() {
     this.ctxMenuId1 = null;
     this.ctxMenuId2 = null;
+    this.ctxMenuId3 = null;
     this.init().catch(e => {
       console.log("Error loading extension", { e });
     });
@@ -51,6 +52,12 @@ class Main {
       contexts: ["image"],
       onclick: this.onContextMenu2Click
     });
+    if (this.ctxMenuId3) return;
+    this.ctxMenuId3 = chromeService.createContextMenu({
+      title: "upload pdf to extract text from",
+      contexts: ["all"],
+      onclick: this.onContextMenu3Click
+    });
   };
   onContextMenu1Click = async (info, tab) => {
     const screenshotUrl = await chromeService.takeScreenShot();
@@ -63,6 +70,9 @@ class Main {
   onContextMenu2Click = (info, tab) => {
     const { srcUrl } = info;
     chromeService.openHelpPage(encodeURIComponent(srcUrl));
+  };
+  onContextMenu3Click = (info, tab) => {
+    chromeService.openHelpPage("", "/#/pdf");
   };
 }
 
