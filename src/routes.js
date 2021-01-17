@@ -38,7 +38,7 @@ const Routes = async () => {
   });
   //open new tab
   MessagePassingService.on("/open_tab", (req, res, options) => {
-    chromeService.openHelpPage(encodeURIComponent(req.imgSrc));
+    chromeService.openHelpPage("home", encodeURIComponent(req.imgSrc));
   });
 };
 

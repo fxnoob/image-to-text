@@ -2,6 +2,9 @@ import React from "react";
 import Share from "./Share";
 import chromeService from "../../services/chromeService";
 
+const extUrl =
+  "https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo";
+
 export default function OCRCard(props) {
   const [copied, setCopied] = React.useState(false);
   const [playing, togglePlay] = React.useState(false);
@@ -27,6 +30,9 @@ export default function OCRCard(props) {
     setTimeout(() => {
       setCopied(false);
     }, 2000);
+  };
+  const openPdfPage = () => {
+    chromeService.openHelpPage("pdf");
   };
   const { url, ocrText } = props;
   return (
@@ -106,6 +112,23 @@ export default function OCRCard(props) {
                     </svg>
                     Image taken for OCR (Optical Character Recognition)
                   </figcaption>
+                  <a
+                    className="flex-none text-3xl"
+                    href={extUrl}
+                    style={{
+                      lineHeight: "2rem",
+                      marginLeft: "0rem",
+                      textDecoration: "underline",
+                      color: "#00a774 !important"
+                    }}
+                  >
+                    <span className="star"></span>
+                    <span className="star"></span>
+                    <span className="star"></span>
+                    <span className="star"></span>
+                    <span className="star"></span>
+                    <p>Rate us</p>
+                  </a>
                 </figure>
               </div>
             </div>
@@ -127,6 +150,13 @@ export default function OCRCard(props) {
                 >
                   Translate
                 </a>
+                <button
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition duration-150 ease-in-out btn"
+                  onClick={openPdfPage}
+                  style={{ marginLeft: "1rem" }}
+                >
+                  Extract Pdf
+                </button>
                 <button
                   onClick={() => {
                     copyText(ocrText);

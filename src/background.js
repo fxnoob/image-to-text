@@ -69,10 +69,10 @@ class Main {
   };
   onContextMenu2Click = (info, tab) => {
     const { srcUrl } = info;
-    chromeService.openHelpPage(encodeURIComponent(srcUrl));
+    chromeService.openHelpPage("home", encodeURIComponent(srcUrl));
   };
   onContextMenu3Click = (info, tab) => {
-    chromeService.openHelpPage("", "/#/pdf");
+    chromeService.openHelpPage("pdf");
   };
 }
 

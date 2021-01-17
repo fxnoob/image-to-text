@@ -262,3 +262,48 @@
 .resp-sharing-button--telegram:hover {
   background-color: #4b97d1;
 }
+
+.stars {
+  display: flex;
+}
+
+.star {
+  flex: 25%;
+  margin: 50px 0;
+  position: relative;
+  display: inline-block;
+  color: red;
+  width: 0px;
+  height: 0px;
+  border-right: 50px solid transparent;
+  border-bottom: 33px solid gold;
+  border-left: 50px solid transparent;
+  transform: rotate(35deg);
+}
+.star:before {
+  border-bottom: 40px solid gold;
+  border-left: 15px solid transparent;
+  border-right: 25px solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -25px;
+  left: -30px;
+  display: block;
+  content: "";
+  transform: rotate(-32deg);
+}
+.star:after {
+  position: absolute;
+  display: block;
+  color: red;
+  top: 0;
+  left: -50px;
+  width: 0;
+  height: 0;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid gold;
+  border-left: 50px solid transparent;
+  transform: rotate(-70deg);
+  content: "";
+}
