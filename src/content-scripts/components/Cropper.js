@@ -256,7 +256,6 @@ const HAS_WINDOW = typeof window !== "undefined";
 
 const addWindowHandler = (windowObj, eventName, handler) => {
   if (HAS_WINDOW) {
-    console.log({ windowObj });
     windowObj.addEventListener(eventName, handler);
   }
 };
@@ -374,7 +373,6 @@ class Cropper extends React.Component {
   }
 
   _handlePortholeMouseDown(event) {
-    console.log("_handlePortholeMouseDown");
     if (event.target.getAttribute("data-handle")) {
       return;
     }
@@ -438,13 +436,11 @@ class Cropper extends React.Component {
   }
 
   _handlePortholeMouseUp(event) {
-    console.log("_handlePortholeMouseUp");
     event.preventDefault();
     this._finishMoveAction();
   }
 
   _handleHandleMouseDown(direction, event) {
-    console.log("_handleHandleMouseDown");
     event.preventDefault();
 
     let { cropMask } = this.state;

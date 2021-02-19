@@ -3,6 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import FrameCropper from "./FrameCropper";
 import initialContent from "./initialIframeContent";
 import messagePassing from "../../services/messagePassing";
+import mediaControl from "../../services/MediaControl";
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -17,7 +18,10 @@ export default class Index extends React.Component {
       const { path, screenshotUrl } = req;
       if (path == "/show_popup") {
         if (!this.state.isModalOpen) {
+          mediaControl.mutePage();
           this.setState({ imgSrc: screenshotUrl });
+        } else {
+          mediaControl.unmutePage();
         }
         this.setState({ isModalOpen: !this.state.isModalOpen });
       }
