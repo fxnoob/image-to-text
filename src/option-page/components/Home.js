@@ -180,7 +180,8 @@ export default function OCRCard(props) {
                 style={{
                   marginTop: "2rem",
                   border: "1px solid",
-                  padding: "1rem"
+                  padding: "1rem",
+                  whiteSpace: 'pre',
                 }}
                 class="prose text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1"
               >
