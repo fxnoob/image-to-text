@@ -15,6 +15,10 @@ class Main {
     this.init().catch(e => {
       console.log("Error loading extension", { e });
     });
+    // on install listener callback
+    this.onInstallListener();
+    // set feedback form url
+    this.setFeedbackFormUrl();
   }
   init = async () => {
     chromeService.setBadgeOnActionIcon("Loading...");
@@ -73,6 +77,23 @@ class Main {
   };
   onContextMenu3Click = (info, tab) => {
     chromeService.openHelpPage("pdf");
+  };
+
+  /**
+   *On install extension event
+   * */
+  onInstallListener = () => {
+    chrome.runtime.onInstalled.addListener(details => {
+      // details.reason for install method
+      chromeService.openHelpPage("welcome");
+    });
+  };
+
+  /**
+   *set feedback form url shown while uninstalling
+   * */
+  setFeedbackFormUrl = () => {
+    chrome.runtime.setUninstallURL("https://forms.gle/fmyBArGndYGxwS5V9");
   };
 }
 

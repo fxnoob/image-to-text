@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./App";
 import Pdf from "./Pdf";
+import Welcome from "./Welcome";
 const queryString = require("query-string");
 const parsed = queryString.parse(location.search);
 const path = decodeURIComponent(parsed.path ? parsed.path : "home");
@@ -13,6 +14,9 @@ const GetView = ({ path }) => {
       break;
     case "pdf":
       view = <Pdf />;
+      break;
+    case "welcome":
+      view = <Welcome />;
       break;
     default:
       view = <Home />;
