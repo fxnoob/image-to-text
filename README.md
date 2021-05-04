@@ -1,3 +1,5 @@
+## Moved to https://github.com/fxnoob/image-to-text-pro
+
 # Image to Text chrome extension
 
 ### Extract Text from an Image on any webpage.
