@@ -9,6 +9,11 @@ const constants = {
   },
   contentScript: {
     mountId: guid.generateGuid()
+  },
+  support: {
+    uninstallFeedbackForm: "https://forms.gle/fmyBArGndYGxwS5V9",
+    proVersionLink:
+      "https://chrome.google.com/webstore/detail/conhdoedbhajlpaiiepgmfcdhhmkalci"
   }
 };
 

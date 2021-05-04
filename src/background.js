@@ -2,6 +2,7 @@ import "@babel/polyfill";
 import chromeService from "./services/chromeService";
 import Routes from "./routes";
 import messagePassing from "./services/messagePassing";
+import Constants from "../constants";
 /**
  * Main extension functionality
  *
@@ -93,7 +94,7 @@ class Main {
    *set feedback form url shown while uninstalling
    * */
   setFeedbackFormUrl = () => {
-    chrome.runtime.setUninstallURL("https://forms.gle/fmyBArGndYGxwS5V9");
+    chrome.runtime.setUninstallURL(Constants.support.uninstallFeedbackForm);
   };
 }
 

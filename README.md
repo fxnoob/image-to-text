@@ -13,6 +13,10 @@
 > - Play extracted text as an Audio(tts)
 > - PDF text extraction
 
-#### WebStore
+#### Chrome WebStore (All free)
 
 [https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo](https://chrome.google.com/webstore/detail/image-to-text/jgjlejdhmfpimggbicpffmpbnalcnhoo)
+
+### Pro Version (All free)
+
+[https://chrome.google.com/webstore/detail/conhdoedbhajlpaiiepgmfcdhhmkalci](https://chrome.google.com/webstore/detail/conhdoedbhajlpaiiepgmfcdhhmkalci)

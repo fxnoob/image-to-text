@@ -1,6 +1,6 @@
 {
   "name": "text-to-image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "homepage": "https://fxnoob.github.io/chrome-extension-boilerplate",
@@ -10,7 +10,7 @@
     "prestart": "yarn build:tailwind",
     "prebuild": "yarn rm && yarn build:tailwind",
     "rm": "rm -rf dist/",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start": "yarn dev",
     "dev": "webpack --watch --progress --colors --config webpack.config.js --mode=development",
     "build": "webpack --progress --colors --config webpack.config.js --mode=production",
     "jsdoc": "jsdoc src -r",
